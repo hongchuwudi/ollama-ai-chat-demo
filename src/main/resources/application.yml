@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: hc-ai
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: deepseek-r1:1.5b
+        endpoint: /api/generate
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: debug #环绕增强
+    com.hc.ollamaai: debug  #聊天
