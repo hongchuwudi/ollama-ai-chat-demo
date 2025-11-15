@@ -34,9 +34,10 @@ public class ChatController {
     }
 
     //  流式记忆
-    @PostMapping("/chat")
+    @PostMapping(value = "/chat")
     public  Flux<String> chat(@RequestParam String prompt,
                               @RequestParam String chatId) {
+        // 保存会话
         chatHistoryRepository.save(chatId, "chat");
         //  返回聊天结果
         return chatClient.prompt()

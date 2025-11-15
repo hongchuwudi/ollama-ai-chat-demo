@@ -14,6 +14,7 @@ public class InMemoryChatHistoryRepository implements ChatHistoryRepository{
     @Override
     public void save(String chatId, String type) {
         //  先判断是否有
+        // computeIfAbsent判断是否有无,如果没有用后面的lambda来创建
         List<String> chatIds = chatHistory.computeIfAbsent(type, k -> new ArrayList<>());
         if(chatIds.contains(chatId)) return;
         chatIds.add(chatId);

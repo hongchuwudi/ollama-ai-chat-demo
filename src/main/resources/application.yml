@@ -5,8 +5,10 @@ spring:
     ollama:
       base-url: http://localhost:11434
       chat:
-        model: deepseek-r1:1.5b
+#        model: deepseek-r1:14b
+        model: qwen3:8b
         endpoint: /api/generate
+
 logging:
   level:
     org.springframework.ai.chat.client.advisor: debug #环绕增强
