@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.3</version>
+        <version>3.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hc</groupId>
@@ -29,6 +29,7 @@
     <properties>
         <java.version>17</java.version>
         <spring-ai.version>1.0.1</spring-ai.version>
+        <mybatis-plus.v>3.5.5</mybatis-plus.v>                      <!-- MyBatis-Plus版本 -->
     </properties>
     <dependencies>
         <dependency>
@@ -56,6 +57,18 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- MyBatis Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>                     <!-- MyBatis Plus -->
+            <artifactId>mybatis-plus-annotation</artifactId>    <!-- MyBatis注解 -->
+            <version>${mybatis-plus.v}</version>                <!-- 版本号 -->
+        </dependency>
+        <!-- MyBatis Plus启动器 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.v}</version>
         </dependency>
     </dependencies>
 

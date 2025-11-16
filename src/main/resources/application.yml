@@ -16,7 +16,11 @@ spring:
       chat:
         options:
           model: qwen-max-latest
-
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${hc.datasource.host}:${hc.datasource.port}/itheima?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: ${hc.datasource.username}
+    password: ${hc.datasource.password}
 logging:
   level:
     org.springframework.ai.chat.client.advisor: debug #环绕增强
