@@ -2,12 +2,20 @@ spring:
   application:
     name: hc-ai
   ai:
+    # ollama规范
     ollama:
       base-url: http://localhost:11434
       chat:
-#        model: deepseek-r1:14b
+        # model: deepseek-r1:14b
         model: qwen3:8b
         endpoint: /api/generate
+    # openai规范
+    openai:
+      base-url: https://dashscope.aliyuncs.com/compatible-mode
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: qwen-max-latest
 
 logging:
   level:

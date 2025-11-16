@@ -1,5 +1,6 @@
 package com.hc.ollamaai.config;
 
+import com.hc.ollamaai.constants.SystemConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -9,6 +10,7 @@ import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -34,10 +36,24 @@ public class AiConfig {
     // 3. 配置带记忆的ChatClient
     @Bean
     public ChatClient chatClient(OllamaChatModel model, ChatMemory chatMemory) {
-        log.info("开始配置model: {}", model);
+        log.info("开始配置聊天model: {}", model);
         return ChatClient
                 .builder(model)
                 .defaultSystem("你是一个热心、可爱的智能助手，你的名字叫小团团，请以小团团的身份和语气回答问题。")
+                .defaultAdvisors(
+                        new SimpleLoggerAdvisor(),
+                        MessageChatMemoryAdvisor.builder(chatMemory).build()
+                )
+                .build();
+    }
+
+    // 哄哄模拟器
+    @Bean
+    public ChatClient gameChatClient(OpenAiChatModel model, ChatMemory chatMemory) {
+        log.info("开始配置哄哄模拟器model: {}", model);
+        return ChatClient
+                .builder(model)
+                .defaultSystem(SystemConstants.GAME_SYSTEM_PROMPT)
                 .defaultAdvisors(
                         new SimpleLoggerAdvisor(),
                         MessageChatMemoryAdvisor.builder(chatMemory).build()
