@@ -1,6 +1,8 @@
 spring:
   application:
     name: hc-ai
+  profiles:
+    active: dev  # 激活dev环境
   ai:
     # ollama规范
     ollama:
@@ -18,10 +20,29 @@ spring:
           model: qwen-max-latest
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${hc.datasource.host}:${hc.datasource.port}/itheima?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://${hc.datasource.host}:${hc.datasource.port}/${hc.datasource.db}?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf8
     username: ${hc.datasource.username}
     password: ${hc.datasource.password}
+
+# MyBatis-Plus 公共配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.hc.pojo.entity
+  global-config:
+    db-config:
+      id-type: auto
+      update-strategy: not_null
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+
 logging:
   level:
     org.springframework.ai.chat.client.advisor: debug #环绕增强
     com.hc.ollamaai: debug  #聊天
+

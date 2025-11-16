@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 课程预约类 服务类
  * </p>
  *
  * @author hongchu

@@ -25,7 +25,7 @@ public class ChatController {
     }
 
     // 流式
-    @PostMapping(value = "/fluxChat",produces = "text/event-stream")
+    @PostMapping(value = "/fluxChat",produces = "text/html;charset=utf-8")
     public Flux<String> fluxChat(String prompt){
         return chatClient.prompt()
                 .user(prompt)
@@ -35,8 +35,7 @@ public class ChatController {
 
     //  流式记忆
     @PostMapping(value = "/chat")
-    public  Flux<String> chat(@RequestParam String prompt,
-                              @RequestParam String chatId) {
+    public  Flux<String> chat(@RequestParam String prompt, @RequestParam String chatId) {
         // 保存会话
         chatHistoryRepository.save(chatId, "chat");
         //  返回聊天结果
